@@ -1,0 +1,60 @@
+body {
+	margin: 0;
+	background-color: #000;
+	color: #fff;
+	font-family: Monospace;
+	font-size: 13px;
+	line-height: 24px;
+	overscroll-behavior: none;
+}
+#container{
+	height: 100vh;
+}
+
+#height_slider{
+	width: 80%;
+	position: relative;
+	margin: 0;
+}
+
+#label{
+	color: black;
+	position: relative;
+	padding: 10px;
+}
+
+#value{
+	color: black;
+	position: relative;
+	padding: 10px;
+}
+
+.control{
+	display: flex;
+	bottom: 30px;
+	left: 50%;
+	transform: translateX(-50%);
+	position: absolute;
+	width: 30%;
+	margin: auto;
+}
+
+#download_image{
+	background-color:black;
+	color: white;
+	border: goldenrod;
+	border-radius: 5px;
+	text-decoration: none;
+	top: 50px;
+	left: 100px;
+	position: absolute;
+	padding: 20px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+#download_image:hover{
+	color: orange;
+	border: orange;
+	cursor: pointer;
+}

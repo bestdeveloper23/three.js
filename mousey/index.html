@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>animation10</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/jquery-ui.css">
+    <link rel="stylesheet" href="assets/css/jquery.json-viewer.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/timeline_list.css">
+</head>
+
+<body>
+    <div class="container-fluid vh-100">
+        <div class="row">
+            <div class="col">
+                <nav>
+                    <div class="btn-group btn-group-sm m-3" role="group">
+                        <button class="btn btn-secondary border p-3 px-5" id="btn_import_scene_glb" type="button">Upload</button>
+                        <button class="btn btn-secondary border p-3 px-5" id="btn_export_scene_glb" type="button">Download</button>
+                        <!-- <button class="btn btn-secondary border p-3 px-5" id="btn_export_scene_dae" type="button">DAE</button>
+                        <button class="btn btn-secondary border p-3 px-5" id="btn_export_scene_gltf" type="button">GLTF</button>
+                        <button class="btn btn-secondary border p-3 px-5" id="btn_export_scene_glb" type="button">GLB</button>
+                        <button class="btn btn-secondary border p-3 px-5" id="btn_export_scene_obj" type="button">OBJ</button>
+                        <button class="btn btn-secondary border p-3 px-5" id="btn_export_scene_stl" type="button">STL</button>
+                        <button class="btn btn-secondary border p-3 px-5" id="btn_export_scene_stl_binary" type="button">STL (binary)</button>
+                        <button class="btn btn-secondary border p-3 px-5 ms-1" id="btn_all_animations" type="button" data-bs-target="#modal_all_animations" data-bs-toggle="modal">All Animations</button> -->
+                        <input type="file" id="reload" style="display:none"/> 
+                        <button class="btn btn-success border p-3 px-5 ms-1" id="btn_startAnim" type="button" onclick="startAnim();">Start</button>
+                    </div>
+                        <!-- <button class="btn btn-success border p-3 px-5 ms-1" id="btn_startAnim" type="button">Start</button></div> -->
+                    
+                    <div class="btn-group btn-group-sm m-3" role="group">
+                        <button class="btn btn-secondary border p-3 px-5" id="btn_setkey" type="button">setKey</button>
+                        <span class="input-group-text">time[s]</span><input class="camera-tween" type="text" id="setkey">
+                        <select class="form-select form-control" id="time_keyselect"></select>
+                        <button class="btn btn-secondary border p-3 px-5" id="btn_delkey" type="button">delKey</button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="row h-100">
+            <div class="col-9 h-100">
+                <div class="row h-auto">
+                    <div class="col position-relative bg-white" id="col_canvas"><canvas id="canvas"></canvas></div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card p-0" id="timeline_card" style="min-height: 20px; overflow-x:auto; overflow-y:hidden;">
+                            <div class="row">
+                                <div class="col timeline_model">
+                                <!-- <div class="col" > -->
+                                    <!-- <ul class="list-inline ui-state-default p-0" id="sortable" style="white-space: nowrap;">
+                                        <li class="list-inline-item position-relative d-inline-block m-0">Item 1<span class="small position-absolute top-0 start-0">Animation 1</span>
+                                            <div class="fas fa-arrows-alt-h w-100 resize bg-success position-absolute bottom-0 start-0"></div>
+                                        </li>
+                                        <li class="list-inline-item position-relative d-inline-block m-0">Item 1<span class="small position-absolute top-0 start-0">Animation 1</span>
+                                            <div class="fas fa-arrows-alt-h w-100 resize bg-success position-absolute bottom-0 start-0"></div>
+                                        </li>
+                                        <li class="list-inline-item position-relative d-inline-block m-0">Item 1<span class="small position-absolute top-0 start-0">Animation 1</span>
+                                            <div class="fas fa-arrows-alt-h w-100 resize bg-success position-absolute bottom-0 start-0"></div>
+                                        </li>
+                                        <li class="list-inline-item position-relative d-inline-block m-0">Item 1<span class="small position-absolute top-0 start-0">Animation 1</span>
+                                            <div class="fas fa-arrows-alt-h w-100 resize bg-success position-absolute bottom-0 start-0"></div>
+                                        </li>
+                                        <li class="list-inline-item position-relative d-inline-block m-0">Item 1<span class="small position-absolute top-0 start-0">Animation 1</span>
+                                            <div class="fas fa-arrows-alt-h w-100 resize bg-success position-absolute bottom-0 start-0"></div>
+                                        </li>
+                                        <li class="list-inline-item position-relative d-inline-block m-0">Item 1<span class="small position-absolute top-0 start-0">Animation 1</span>
+                                            <div class="fas fa-arrows-alt-h w-100 resize bg-success position-absolute bottom-0 start-0"></div>
+                                        </li>
+                                        <li class="list-inline-item position-relative d-inline-block m-0">Item 1<span class="small position-absolute top-0 start-0">Animation 1</span>
+                                            <div class="fas fa-arrows-alt-h w-100 resize bg-success position-absolute bottom-0 start-0"></div>
+                                        </li>
+                                        <li class="list-inline-item position-relative d-inline-block m-0">Item 1<span class="small position-absolute top-0 start-0">Animation 1</span>
+                                            <div class="fas fa-arrows-alt-h w-100 resize bg-success position-absolute bottom-0 start-0"></div>
+                                        </li>
+                                        <li class="list-inline-item position-relative d-inline-block m-0">Item 1<span class="small position-absolute top-0 start-0">Animation 1</span>
+                                            <div class="fas fa-arrows-alt-h w-100 resize bg-success position-absolute bottom-0 start-0"></div>
+                                        </li>
+                                        <li class="list-inline-item position-relative d-inline-block m-0">Item 1<span class="small position-absolute top-0 start-0">Animation 1</span>
+                                            <div class="fas fa-arrows-alt-h w-100 resize bg-success position-absolute bottom-0 start-0"></div>
+                                        </li>
+                                    </ul> -->
+                                </div>
+                            </div>
+                            <div class="card-body p-0" id="card_timeline_minutes">
+                                <div id="card_timeline_seconds" class="w-100 h-100"></div>
+                                
+                                <div class=" timeline_background" id='timeline_background'></div> 
+                                
+                            </div>
+                            <div id='waveform'></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card mb-2">
+                    <div class="card-header" data-bs-toggle="collapse" href=".env_cardbody" aria-expanded="false" aria-controls="env_cardbody" style="cursor:pointer;">
+                        <div class="row">
+                            <div class="col-8">
+                                <h6 class="text-muted mb-2">Environment</h6>
+                            </div>
+                            <div class="col-2 text-end"><span class="badge bg-primary">XDR2</span></div>
+                            <div class="col-2 text-end"><i class="fas fa-chevron-down"></i></div>
+                        </div>
+                    </div>
+                    <div class="card-body env_cardbody collapse">
+                        <div class="row">
+                            <div class="col">
+                                <div class="input-group input-group-sm"><input class="form-control" type="file" id="env_file"></div>
+                                <div class="input-group input-group-sm"><span class="input-group-text">ID</span><input class="form-control" type="text" id="env_id" readonly="" disabled="" autocomplete="off"></div>
+                                <div class="input-group input-group-sm"><span class="input-group-text">Name</span><input class="form-control" type="text" id="env_name" data-key="name" autocomplete="off" disabled="" readonly="" value="Environment"></div>
+                                <div class="input-group input-group-sm" data-key="name"><span class="input-group-text" data-key="name">Position</span><input class="form-control" type="text" id="env_position" value="0,0,0" data-key="position" autocomplete="off"></div>
+                                <div class="input-group input-group-sm" data-key="name"><span class="input-group-text" data-key="name">Rotation</span><input class="form-control" type="text" id="env_rotation" value="0,0,0" data-key="rotation" autocomplete="off"></div>
+                                <div class="input-group input-group-sm" data-key="name"><span class="input-group-text" data-key="name">Scale</span><input class="form-control" type="text" id="env_scale" value="1,1,1" data-key="scale" autocomplete="off"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer env_cardbody collapse">
+                        <div class="btn-group btn-group-sm" role="group"><button class="btn btn-primary" id="btn_env_set_pos" type="button">Set POS</button><button class="btn btn-primary" id="btn_env_set_rot" type="button">Set ROT</button><button class="btn btn-primary" id="btn_env_set_scl" type="button">Set SCL</button><button class="btn btn-success btn-sm" id="btn_env_applyall" type="button">Apply All</button></div>
+                    </div>
+                </div>
+                <div class="card mb-2">
+                    <div class="card-header" data-bs-toggle="collapse" href=".models_cardbody" aria-expanded="false" aria-controls="models_cardbody" style="cursor:pointer;">
+                        <div class="row">
+                            <div class="col-8">
+                                <h6 class="text-muted mb-2">Models</h6>
+                            </div>
+                            <div class="col-2 text-end"><span class="badge bg-primary">Xf9i</span></div>
+                            <div class="col-2 text-end"><i class="fas fa-chevron-down"></i></div>
+                        </div>
+                    </div>
+                    <div class="card-body models_cardbody collapse">
+                        <div class="row">
+                            <div class="col">
+                                <div class="input-group input-group-sm"><input class="form-control" type="file" id="model_file"></div>
+                                <div class="input-group input-group-sm"><span class="input-group-text">ID</span><input class="form-control" type="text" id="model_id" readonly="" disabled=""></div>
+                                <div class="input-group input-group-sm"><span class="input-group-text">Name</span><input class="form-control" type="text" id="model_name" data-key="name"></div>
+                                <div class="input-group input-group-sm"><span class="input-group-text">Position</span><input class="form-control" type="text" id="model_position" value="0,0,0" data-key="position"></div>
+                                <div class="input-group input-group-sm"><span class="input-group-text">Rotation</span><input class="form-control" type="text" id="model_rotation" value="0,0,0" data-key="rotation"></div>
+                                <div class="input-group input-group-sm"><span class="input-group-text">Scale</span><input class="form-control" type="text" id="model_scale" value="1,1,1" data-key="scale"></div>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col text-center"><button class="btn btn-success btn-sm" id="btn_append_model" type="button"><i class="fas fa-plus"></i></button></div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <ul class="list-unstyled" id="model_list"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer models_cardbody collapse">
+                        <div class="btn-group btn-group-sm" role="group"><button class="btn btn-primary" id="btn_model_set_pos" type="button">Set POS</button><button class="btn btn-primary" id="btn_model_set_rot" type="button">Set ROT</button><button class="btn btn-primary" id="btn_model_set_scl" type="button">Set SCL</button><button class="btn btn-success btn-sm" id="btn_model_applyall" type="button">Apply All</button></div>
+                    </div>
+                </div>
+                <div class="card mb-2">
+                    <div class="card-header" data-bs-toggle="collapse" href=".animations_cardbody" aria-expanded="false" aria-controls="animations_cardbody" style="cursor:pointer;">
+                        <div class="row">
+                            <div class="col-8">
+                                <h6 class="text-muted mb-2">Animations</h6>
+                            </div>
+                            <div class="col-2 text-end"><span class="badge bg-primary">X4hJ</span></div>
+                            <div class="col-2 text-end"><i class="fas fa-chevron-down"></i></div>
+                        </div>
+                    </div>
+                    <div class="card-body collapse animations_cardbody">
+                        <div class="row">
+                            <div class="col-4">
+                                <ul class="list-unstyled" id="model_list_left"></ul>
+                            </div>
+                            <div class="col-8">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="input-group input-group-sm"><input class="form-control" type="file" id="anim_file"></div>
+                                        <div class="input-group input-group-sm"><span class="input-group-text">ID</span><input class="form-control" type="text" id="anim_id" readonly="" disabled=""></div>
+                                        <div class="input-group input-group-sm"><span class="input-group-text">Name</span><input class="form-control" type="text" id="anim_name" data-key="name"></div>
+                                        <div class="input-group input-group-sm"><span class="input-group-text">isAdditive</span>
+                                            <select class="form-select" id="anim_isadditive" data-key="isAdditive">
+                                                <option value="mute" selected=""></option>
+                                                <option value="true">True</option>
+                                                <option value="false">False</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-group input-group-sm"><span class="input-group-text">TimeScale</span><input class="form-control" type="text" id="anim_timescale" value="1" data-key="timescale"></div>
+                                    </div>
+                                </div>
+                                <div class="row my-2">
+                                    <div class="col text-center"><button class="btn btn-success btn-sm" id="btn_append_anim" type="button"><i class="fas fa-plus"></i></button></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <ol id="anim_list"></ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center collapse animations_cardbody"><button class="btn btn-primary btn-sm" id="btn_finish" type="button">SetTimeScale</button></div>
+                </div>
+                <div class="card">
+                    <div class="card-body p-3" style="height: 250px; overflow-y: auto; overflow-x: hidden;">
+                        <p class="fs-6 d-block" id="camera_p" style="white-space: pre; font-size:10px !important; letter-spacing: 1px;">Paragraph</p><button class="btn btn-primary btn-sm" id="btn_json" type="button">JSON</button>
+                        <p class="fs-6 d-block" id="json_p" style="white-space: pre; font-size:10px !important; letter-spacing: 1px;"><span style="color: rgb(0, 0, 0);">"W" translate, "E" rotate, "R" scale, "+/-" adjust size</span><br>"<span style="color: rgb(0, 0, 0);">Q" toggle world/local space, "Shift" snap to grid</span><br><span style="color: rgb(0, 0, 0);">"X" toggle X, "Y" toggle Y, "Z" toggle Z</span><br><span style="color: rgb(0, 0, 0);">"Spacebar" toggle enabled</span><br><span style="color: rgb(0, 0, 0);">"Esc" reset current transform</span><br><span style="color: rgb(0, 0, 0);">"C" toggle camera, "V" random zoom</span><br><br></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="modal_all_animations">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Title</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <section class="photo-gallery py-4 py-xl-5">
+                        <div class="container">
+                            <div class="row mb-5">
+                                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                                    <h2>Heading</h2>
+                                    <p class="w-lg-50">Curae hendrerit donec commodo hendrerit egestas tempus, turpis facilisis nostra nunc. Vestibulum dui eget ultrices.</p>
+                                </div>
+                            </div>
+                            <div class="row gx-2 gy-2 row-cols-1 row-cols-md-2 row-cols-xl-3 photos" id="all_animations_gallery" data-bss-baguettebox="">
+                                <div class="col item"><a href="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"><img class="img-fluid" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"></a></div>
+                                <div class="col item"><a href="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"><img class="img-fluid" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"></a></div>
+                                <div class="col item"><a href="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"><img class="img-fluid" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"></a></div>
+                                <div class="col item"><a href="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"><img class="img-fluid" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"></a></div>
+                                <div class="col item"><a href="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"><img class="img-fluid" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"></a></div>
+                                <div class="col item"><a href="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"><img class="img-fluid" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png"></a></div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/inflate.min.js"></script>
+    <script src="assets/js/three143.js"></script>
+    <script src="assets/js/controls/TransformControls143.js"></script>
+    <script src="assets/js/controls/OrbitControls.js"></script>
+    <script src="assets/js/controls/setTransformKeys.js"></script>
+    <script src="assets/js/jquery.json-viewer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.145/examples/js/libs/fflate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.145/examples/js/loaders/ColladaLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.145/examples/js/loaders/FBXLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.145/examples/js/loaders/GCodeLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.145/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.145/examples/js/loaders/OBJLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.145/examples/js/loaders/STLLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.145/examples/js/loaders/BVHLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.145/examples/js/loaders/SVGLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.145/examples/js/exporters/ColladaExporter.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.145/examples/js/exporters/GLTFExporter.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.145/examples/js/exporters/OBJExporter.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.145/examples/js/exporters/STLExporter.js"></script>
+    <script src="assets/js/geometries/RoundedBoxGeometry.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+    <script src="assets/js/modifiers/CurveModifier.js"></script>
+    <script src="assets/js/functions.js"></script>
+    <script src="assets/js/imports.js"></script>
+    <script src="assets/js/downlaod.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/timeline.js"></script>
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/XDR2.js"></script>
+    <!-- <script src="assets/js/Xf9i_old.js"></script> -->
+    <script src="assets/js/jquery-ui.js"></script>
+    <script src="assets/js/X4hJ.js"></script>
+    <script src="assets/js/Xf9i.js"></script>
+    <script src="assets/js/reload.js"></script>
+    <script src="assets/js/wavesurfer.js"></script>
+    <script src="assets/js/audio.js"></script>
+    <script src="assets/js/cameratween.js"></script>
+</body>
+
+</html>

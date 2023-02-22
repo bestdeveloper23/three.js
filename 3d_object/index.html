@@ -1,0 +1,88 @@
+<html ng-app="3dRender">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js"></script>
+    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+	<link href="main.css" rel="stylesheet">
+  </head>
+  <body>
+	<script src="https://threejs.org/build/three.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/libs/fflate.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/FBXLoader.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/OBJLoader.js"></script>
+
+
+	<!-- <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script> -->
+
+	<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/DragControls.js"></script>
+	<script src="index.js"></script>
+	
+	<div ng-controller="mainCtrl">
+		
+	
+		<script type="text/ng-template" id="defaultSceneModalContent.html">
+			<div class="modal-header">
+				<h3 class="modal-title">Edit Default Scene</h3>
+				<div class="row">
+					<input id="defaultFileInput" type='file' class="form-control" style="width: 500px; float: left; margin-right: 10px;">
+					<i class="fa fa-upload btn btn-warning" ng-click="uploadFile()"> Upload</i>
+				</div>
+			</div>
+		
+			<div class="modal-body" id="scenecontainer1">
+			
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary pull-left" ng-click="addCircle()">Add Circle</button>
+				<button class="btn btn-success" ng-click="save()">Save</button>
+				<button class="btn btn-default" ng-click="cancel()">Cancel</button>
+			</div>
+		</script>
+
+		<script type="text/ng-template" id="scene1EditModalContent.html">
+			<div class="modal-header">
+				<h3 class="modal-title">Edit Scene 1</h3>
+				<div class="row">
+					<input id="scene1FileInput" type='file' class="form-control" style="width: 500px; float: left; margin-right: 10px;">
+					<i class="fa fa-upload btn btn-warning" ng-click="uploadFile()"> Upload</i>
+				</div>
+			</div>
+			<div class="modal-body" id="scenecontainer2">
+			
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-success" ng-click="save()">Save</button>
+				<button class="btn btn-default" ng-click="cancel()">Cancel</button>
+			</div>
+		</script>
+	
+		<script type="text/ng-template" id="scene1ViewModalContent.html">
+			<div class="modal-header">
+				<h3 class="modal-title">View Scene 1</h3>
+			</div>
+			<div class="modal-body" id="scenecontainer3">
+			
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary pull-left" ng-click="changeCircleColor()">Change Circle Color</button>
+				<button class="btn btn-default" ng-click="cancel()">Cancel</button>
+			</div>
+		</script>
+	
+
+		<button class="btn btn-default" ng-click="openDefaultSceneModal()">Edit Default Scene</button>
+		<button class="btn btn-default" ng-click="openScene1EditModal()">Edit Scene 1</button>
+		<button class="btn btn-default" ng-click="openSceneViewModal()">View Scene 1</button>
+		<hr/>
+		<p ng-show="!defaultSceneConfig"> Default Scene has not been configured</p>
+		<p ng-show="defaultSceneConfig"> Default Scene is ready</p>
+		<p ng-show="!scene1Config"> Scene 1 has not been configured</p>
+		<p ng-show="scene1Config"> Scene 1 is ready</p>
+	
+	</div>
+  </body>
+</html>
